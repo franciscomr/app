@@ -5,6 +5,12 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Database\Seeders\Catalogs\Company\CompanySeeder;
+use Database\Seeders\Catalogs\Company\BranchSeeder;
+use Database\Seeders\Catalogs\Company\DepartmentSeeder;
+use Database\Seeders\Catalogs\Company\JobSeeder;
+use Database\Seeders\Catalogs\Company\EmployeeSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,11 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            CompanySeeder::class,
+            BranchSeeder::class,
+            DepartmentSeeder::class,
+            JobSeeder::class,
+            EmployeeSeeder::class
+        ]);
     }
 }
