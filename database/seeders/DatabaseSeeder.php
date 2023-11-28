@@ -11,6 +11,8 @@ use Database\Seeders\Catalogs\Company\DepartmentSeeder;
 use Database\Seeders\Catalogs\Company\JobSeeder;
 use Database\Seeders\Catalogs\Company\EmployeeSeeder;
 
+use Database\Seeders\UserSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -23,7 +25,8 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             DepartmentSeeder::class,
             JobSeeder::class,
-            EmployeeSeeder::class
+            EmployeeSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

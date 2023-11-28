@@ -9,6 +9,8 @@ use App\Http\Controllers\Catalogs\Company\DepartmentController;
 use App\Http\Controllers\Catalogs\Company\JobController;
 use App\Http\Controllers\Catalogs\Company\EmployeeController;
 
+use App\Http\Controllers\Auth\SessionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,7 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::controller(CompanyController::class)->group(function () {
+Route::post('login', [SessionController::class, 'login'])->name('login');
+
+Route::controller(CompanyController::class)->middleware('auth:sanctum')->group(function () {
     Route::get('companies', 'index')->name('companies.index');
     Route::get('companies/{company}', 'show')->name('companies.show');
     Route::post('companies', 'store')->name('companies.store');
