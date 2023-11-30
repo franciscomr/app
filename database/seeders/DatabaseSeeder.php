@@ -11,6 +11,13 @@ use Database\Seeders\Catalogs\Company\DepartmentSeeder;
 use Database\Seeders\Catalogs\Company\JobSeeder;
 use Database\Seeders\Catalogs\Company\EmployeeSeeder;
 
+use Database\Seeders\Catalogs\Assets\ContractTypeSeeder;
+use Database\Seeders\Catalogs\Assets\ContractSeeder;
+use Database\Seeders\Catalogs\Assets\AssetCategorySeeder;
+use Database\Seeders\Catalogs\Assets\AssetTypeSeeder;
+use Database\Seeders\Catalogs\Assets\VendorSeeder;
+use Database\Seeders\Catalogs\Assets\ProductSeeder;
+
 use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,7 +33,13 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             JobSeeder::class,
             EmployeeSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            ContractTypeSeeder::class,
+            ContractSeeder::class,
+            AssetCategorySeeder::class,
+            AssetTypeSeeder::class,
+            VendorSeeder::class,
+            //   ProductSeeder::class
         ]);
     }
 }

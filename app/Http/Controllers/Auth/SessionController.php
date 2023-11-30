@@ -25,9 +25,10 @@ class SessionController extends Controller
 
     $request->authenticate();
     $user = User::where('username', $request->validated('username'))->first();
-
+    $token = $user->createToken('Bearer')->plainTextToken;
     return response()->json([
-      'data' => new GetAuthenticatedUserResource($user)
+      'data' => new GetAuthenticatedUserResource($user),
+      'token' => $token
     ]);
 
     /*
