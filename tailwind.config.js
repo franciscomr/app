@@ -6,7 +6,17 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor:{
+        skin:{
+          fill:'var(--color-primary)',
+        }
+      },
+      colors: {
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+      }
+    },
+
   },
   plugins: [],
 }
