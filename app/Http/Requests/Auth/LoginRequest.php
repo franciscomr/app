@@ -12,6 +12,8 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Str;
 
+use App\Models\User;
+
 class LoginRequest extends FormRequest
 {
   /**
@@ -40,8 +42,8 @@ class LoginRequest extends FormRequest
   public function rules(): array
   {
     $rules = [
-      'username' => ['required ', ' max:20', new LoginValidationRule()],
-      'password' =>  ['required ', ' max:20'],
+      'username' => ['required'],
+      'password' =>  ['required'],
     ];
 
     return $rules;
@@ -62,7 +64,9 @@ class LoginRequest extends FormRequest
   {
     $this->ensureIsNotRateLimited();
 
-    if (!Auth::attempt($this->only('username', 'password'))) {
+    if (!Auth::attempt($this->only('username', 'password')) || $this->validateIsActive()) {
+
+
       RateLimiter::hit($this->throttleKey());
       $numberOfAttemps =  RateLimiter::remaining($this->throttleKey(), 3);
       throw ValidationException::withMessages([
@@ -102,5 +106,15 @@ class LoginRequest extends FormRequest
   public function throttleKey(): string
   {
     return Str::transliterate(Str::lower($this->input('username')) . '|' . $this->ip());
+  }
+
+  public function validateIsActive(): bool
+  {
+    $exists = User::join('employees', 'users.employee_id', '=', 'employees.id')
+      ->where('users.username', $this->input('username'))
+      ->where('employees.isActive', true)
+      ->where('users.is_active', true)
+      ->exists();
+    return !$exists;
   }
 }

@@ -18,6 +18,9 @@ use Database\Seeders\Catalogs\Assets\AssetTypeSeeder;
 use Database\Seeders\Catalogs\Assets\VendorSeeder;
 use Database\Seeders\Catalogs\Assets\ProductSeeder;
 
+use Database\Seeders\Permissions\RoleSeeder;
+
+
 use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,6 +31,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            RoleSeeder::class,
             CompanySeeder::class,
             BranchSeeder::class,
             DepartmentSeeder::class,

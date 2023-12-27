@@ -7,7 +7,7 @@
     </div>
   </button>
     
-  <div v-show="showItems" class="indent-8 px-0.5 flex flex-col items-center w-full">
+  <div v-show="showItems">
     <slot name="content" />
   </div>
 </template>

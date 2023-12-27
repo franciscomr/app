@@ -31,9 +31,13 @@ use App\Http\Controllers\Auth\SessionController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+})->name('get.user');
 
-Route::post('login', [SessionController::class, 'login'])->name('login');
+//Route::post('login', [SessionController::class, 'login'])->name('login');
+Route::controller(SessionController::class)->group(function () {
+    Route::post('login', 'login')->name('login');
+    Route::post('logout', 'logout')->name('logout');
+});
 
 Route::controller(CompanyController::class)->middleware('auth:sanctum')->group(function () {
     Route::get('companies', 'index')->name('companies.index');
@@ -113,12 +117,4 @@ Route::controller(VendorController::class)->middleware('auth:sanctum')->group(fu
     Route::post('vendors', 'store')->name('vendors.store');
     Route::patch('vendors/{vendor}', 'update')->name('vendors.update');
     Route::get('vendors/export', 'export')->name('vendors.export');
-});
-
-Route::controller(ProductController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('products', 'index')->name('products.index');
-    Route::get('products/{product}', 'show')->name('products.show');
-    Route::post('products', 'store')->name('products.store');
-    Route::patch('products/{product}', 'update')->name('products.update');
-    Route::get('products/export', 'export')->name('products.export');
 });

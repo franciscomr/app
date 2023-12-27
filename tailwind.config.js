@@ -7,11 +7,6 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundColor:{
-        skin:{
-          fill:'var(--color-primary)',
-        }
-      },
       colors: {
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
       }

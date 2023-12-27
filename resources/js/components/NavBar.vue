@@ -1,7 +1,9 @@
 <template>
   <div class="inline-flex w-full bg-primary">
     <div class="sm:w-1/3 w-1/2 flex items-center">
-      <slot name="left" />
+      <div class="inline-flex space-x-2">
+        <slot name="left" />
+      </div>
     </div>
 
     <div class="w-1/3 hidden sm:flex items-center justify-center ">
@@ -9,7 +11,9 @@
     </div>
 
     <div class="sm:w-1/3 w-1/2 flex items-center justify-end">
-    <slot name="right" />
+      <div class="inline-flex space-x-2">
+        <slot name="right" />
+      </div>
     </div>
   </div>
 

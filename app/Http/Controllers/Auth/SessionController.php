@@ -16,83 +16,24 @@ use Illuminate\Auth\Events\Lockout;
 
 class SessionController extends Controller
 {
-
-
-
-
   public function login(LoginRequest $request)
   {
-
     $request->authenticate();
+
     $user = User::where('username', $request->validated('username'))->first();
-    $token = $user->createToken('Bearer')->plainTextToken;
-    return response()->json([
-      'data' => new GetAuthenticatedUserResource($user),
-      'token' => $token
-    ]);
-
+    return response()->json([$user]);
     /*
-    try {
-      if (!Auth::attempt($request->validated())) {
-        RateLimiter::hit('usernmae|233333');
-
-        return       RateLimiter::remaining('usernmae|233333', 3);
-      } else {
-        return 'si pasó validación';
-      }
-    } catch (\Exception $e) {
-
+      $token = $user->createToken('Bearer')->plainTextToken;
       return response()->json([
-        "message" => trans('auth.failed'),
-        "errors" => [
-          "username" => [
-            trans('auth.throttle'),
-          ]
-        ],
+        'data' => new GetAuthenticatedUserResource($user),
+        'token' => $token
       ]);
-    }
-
-
-
-
-    $request->validate();
-
-
-    $credentials = $request->validated();
-    if (!Auth::attempt($credentials)) {
-
-      return response()->json([
-        "message" => trans('auth.failed'),
-        "errors1" => [
-          "username" => [
-            trans('auth.failed'),
-          ]
-        ],
-      ]);
-    }
-
-  
-      $credentials = $request->validated();
-    if (Auth::attempt($credentials)) {
-      $user = User::where('username', $request->validated('username'))->first();
-      return response()->json([
-        'data' => new GetAuthenticatedUserResource($user)
-      ]);
-    } else {
-      return response()->json([
-        "message" => trans('auth.failed'),
-        "errors1" => [
-          "username" => [
-            trans('auth.failed'),
-            trans('auth.throttle')
-          ]
-        ],
-      ]);
-    } */
+    */
   }
 
   public function logout()
   {
-    //
+    Auth::logout();
+    return response(200);
   }
 }

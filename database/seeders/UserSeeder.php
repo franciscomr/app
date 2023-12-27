@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create(
+        $francisco_martinez = User::create(
             [
                 'employee_id' => 1,
                 'name' => 'Francisco Martinez',
@@ -24,9 +24,11 @@ class UserSeeder extends Seeder
                 'created_by' => 'Administrador',
                 'updated_by' => 'Administrador',
             ]
-        );
+        )->assignRole('admin');
 
-        User::create(
+        $francisco_martinez->branch()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+        $marco_panales = User::create(
             [
                 'employee_id' => 2,
                 'name' => 'Marco Antonio Panales',
@@ -36,9 +38,11 @@ class UserSeeder extends Seeder
                 'created_by' => 'Administrador',
                 'updated_by' => 'Administrador',
             ]
-        );
+        )->assignRole('admin');
 
-        User::create(
+        $marco_panales->branch()->sync([2]);
+
+        $pedro_barrientos = User::create(
             [
                 'employee_id' => 3,
                 'name' => 'Pedro Barrientos',
@@ -48,9 +52,11 @@ class UserSeeder extends Seeder
                 'created_by' => 'Administrador',
                 'updated_by' => 'Administrador',
             ]
-        );
+        )->assignRole('admin');
 
-        User::create(
+        $pedro_barrientos->branch()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+        $daniel_fernandez = User::create(
             [
                 'employee_id' => 4,
                 'name' => 'Daniel Fernandez',
@@ -60,6 +66,22 @@ class UserSeeder extends Seeder
                 'created_by' => 'Administrador',
                 'updated_by' => 'Administrador',
             ]
-        );
+        )->assignRole('it_support');
+
+        $daniel_fernandez->branch()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+        $francisco_quinto = User::create(
+            [
+                'employee_id' => 5,
+                'name' => 'Francisco Quinto',
+                'email' => 'francisco.quinto@sagaji.com.mx',
+                'username' => 'francisco.quinto',
+                'password' => bcrypt('Sagaji01'),
+                'created_by' => 'Administrador',
+                'updated_by' => 'Administrador',
+            ]
+        )->assignRole('auditor');;
+
+        $francisco_quinto->branch()->sync([3]);
     }
 }
