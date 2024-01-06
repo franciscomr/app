@@ -18,7 +18,7 @@ export class FormElementInput extends FormElement {
     }
   }
 
-  private ensureRequiredIsBoolean(value): void {
+  private ensureRequiredIsBoolean(value:any): void {
     if (typeof value !== "boolean") {
       throw new Error(`${value} value must be Boolean`);
 

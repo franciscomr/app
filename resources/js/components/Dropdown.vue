@@ -1,5 +1,5 @@
 <template>
-      <div class="p-1 backdrop-blur-sm bg-white/95 dark:bg-neutral-800/95  rounded shadow dark:shadow-neutral-950  border-white border-opacity-0 flex-col inline-flex w-64 "
+      <div class="p-1 backdrop-blur-sm bg-white/95 dark:bg-neutral-800/95  rounded shadow-lg dark:shadow-neutral-950  border-white border-opacity-0 flex-col inline-flex w-64 "
            :class="styleWidth[width] || 'w-64'" > 
         <slot name="content" />
       </div>

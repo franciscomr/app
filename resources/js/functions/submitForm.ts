@@ -23,7 +23,6 @@ export default async function submitForm(form:resource) {
     case 'login':
       redirectTo = 'home';
       url = route('login')
-      console.log(url)
       formMethod = 'post'
       break;
     case 'create':

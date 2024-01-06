@@ -6,7 +6,10 @@
 
 @layer base {
   :root {
-    --color-primary: 34 49 105;
+    /* --color-primary: 34 49 105;  PROD */
+    /* --color-primary: 184 31 55;  TEST */
+
+    --color-primary: 184 31 55;
     --color-primary-testing: 239 68 68;
   }
 }

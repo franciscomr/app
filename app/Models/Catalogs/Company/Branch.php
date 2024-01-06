@@ -29,13 +29,7 @@ class Branch extends Model
     public $SortAndFilterFields = [
         'id',
         'name',
-        'company_id',
         'address',
-        'city',
-        'state',
-        'postalCode',
-        'createdBy',
-        'updatedBy',
         'createdAt',
         'updatedAt',
     ];

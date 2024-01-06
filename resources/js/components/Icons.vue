@@ -30,6 +30,7 @@
     },
     setup() {
     const styleSize:any = {
+      '2xs': '1rem',
       'xs': '1.25rem',
       'sm': '1.5rem',
       'md': '1.875rem',

@@ -18,6 +18,7 @@ class BranchResource extends JsonResource
 			'type' => 'branches',
 			'id' => (string) $this->resource->id,
 			'attributes' => [
+				'id' => (string) $this->resource->id,
 				'name' => $this->resource->name,
 				'address' => $this->resource->address,
 				'city' => $this->resource->city,
@@ -29,7 +30,7 @@ class BranchResource extends JsonResource
 				'updatedAt' => $this->resource->updatedAt
 			],
 			"relationships" => [
-				"company" => [
+				"companies" => [
 					"data" => ["id" => $this->resource->company->id, "type" => "companies"],
 					'meta' => [
 						'company_id' => $this->resource->company->id,

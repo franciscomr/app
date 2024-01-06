@@ -1,5 +1,5 @@
 <template>
-<span class="text-2xl font-semibold dark:text-neutral-100 flex flex-col">{{ label }}</span>
+<span class="text-2xl font-semibold text-primary dark:text-neutral-100 flex flex-col">{{ label }}</span>
 </template>
 
 <script lang="ts">

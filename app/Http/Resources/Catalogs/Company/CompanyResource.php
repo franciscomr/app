@@ -16,8 +16,8 @@ class CompanyResource extends JsonResource
   {
     return [
       'type' => 'Companies',
-      'id' => (string) $this->resource->id,
       'attributes' => [
+        'id' => (string) $this->resource->id,
         'name' => $this->resource->name,
         'businessName' => $this->resource->businessName,
         'address' => $this->resource->address,

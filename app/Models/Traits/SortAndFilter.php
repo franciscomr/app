@@ -4,21 +4,21 @@ namespace App\Models\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Facades\DB;
 
 trait SortAndFilter
 {
-  public function scopeApplySortAndFilter(Builder $query, $sortRequest, $filterRequest) {
+  public function scopeApplySortAndFilter(Builder $query, $sortRequest, $filterRequest)
+  {
     $this->validateIfParamsExists();
 
     if (is_null($sortRequest) && is_null($filterRequest)) {
       return;
-    } 
-    else {
+    } else {
       $this->SortData($query, $sortRequest);
       $this->Filterdata($query, $filterRequest);
     }
-  } 
+  }
 
   private function validateIfParamsExists()
   {
@@ -50,13 +50,16 @@ trait SortAndFilter
   {
     if (!is_null($filterRequest)) {
       foreach ($filterRequest as $filter => $value) {
-        if (!collect($this->SortAndFilterFields)->contains($filter)) {
-          abort(400, "Filter parameter {$filter} is not allowed");
-        } else {
-          $query->where($filter, 'like', '%' . $value . '%');
+        if ($filter === 'createdAt') {
+          $str_value = explode(",", $value);
+          $query->whereBetween(DB::raw('DATE(createdAt)'), [$str_value[0], $str_value[1]]);
+        } else if ($filter === 'keyword') {
+          $query->where('name', 'like', '%' . $value . '%');
         }
       }
     }
+
+
     return $query;
   }
 }

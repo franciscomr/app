@@ -1,8 +1,8 @@
 <template>
   <button @click="showItems = !showItems" class="px-1 rounded">
     <div class="flex items-center py-1 space-x-1">
-      <Icons :icon-name="iconName" :icon-size="'md'" class="dark:text-neutral-200" />
-      <div class="w-full font-medium text-left text-sm dark:text-neutral-200 leading-tight">{{ label }}</div>
+      <Icons :icon-name="iconName" :icon-size="'sm'" class="dark:text-neutral-200" />
+      <span class="w-full text-sm font-medium tracking-wide text-left  dark:text-neutral-200">{{ label }}</span>
       <div class="transition-transform transform duration-200 dark:text-neutral-200" :class="showItems ? 'rotate-90' : '' "><Icons icon-name="chevron_right" :icon-size="'sm'" :icon-fill="true" /></div>
     </div>
   </button>
@@ -25,7 +25,7 @@ export default {
     iconName: {
       type: String,
       default: 'settings'
-    }
+    },
   },
   components:{
     Icons

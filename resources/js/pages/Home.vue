@@ -16,7 +16,7 @@
             </NavBar>
           </div>
 
-          <div class="flex w-full h-full bg-white dark:bg-neutral-900 overflow-hidden">
+          <div class="flex w-full h-full bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
             <div v-show="showUserMenu" class="absolute top-15 right-0 z-10">
               <Dropdown >
                 <template #content>
@@ -26,21 +26,28 @@
             </div>
 
             <div class="relative z-50">
-              <div v-show="showMenu" v-for="menu in userMenu" class="absolute h-full overflow-y-auto">
-                <Dropdown :width="'lg'">
-                  <template #content>
-                    <DropdownMenu :label="menu.title" :icon-name="menu.icon">
+              <div v-show="showMenu"  class="absolute h-full overflow-y-auto">
+               
+                <Dropdown :width="'lg'" >
+                  <template #content >
+                    <DropdownMenu v-for="menu in userMenu"  :label="menu.title" :icon-name="menu.icon">
                       <template #content>
                         <div v-for="(index, value) in menu.links" :key="index" class="flex items-center justify-start w-full">
-                          <DropdownLink :label="value"  class="indent-9 px-0.5"/>
+                          <DropdownLink :label="value" :route-name="index" class="indent-9 px-0.5"/>
                         </div>
                       </template>
                     </DropdownMenu>
                   </template>
                 </Dropdown>
+             
               </div>
             </div>
+
+            <div class="w-full h-full overflow-y-auto p-4">
+            <router-view />
+            </div>
           </div>
+
         </div>
       </div>
     </template>
@@ -79,13 +86,19 @@ export default {
         'title': 'Organizaciones',
         'icon': 'domain',
         'links': {
-          'Organizaciones': 'organizations',
+          'Organizaciones': 'companies',
           'Sucursales': 'branches',
-          'Departamentos': 'departments',
-          'Puestos': 'positions',
-          'Personal': 'employees',
         }
-      }
+      },
+      'new': {
+        'title': 'New',
+        'icon': 'people',
+        'links': {
+          'Organizaciones': 'companies',
+          'Sucursales': 'branches',
+        }
+      },
+
     }
 
     return { showMenu, showUserMenu, userMenu, logout}
