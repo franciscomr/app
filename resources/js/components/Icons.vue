@@ -1,6 +1,6 @@
 <template>
   <span class="flex items-center justify-center">
-    <Icon :type="iconName" :weight=200 
+    <Icon :type="iconName" :weight=300 
     :size="styleSize[iconSize] || '1.875rem'"  :fill="iconFill === true ? 1 : 0"
     
     />

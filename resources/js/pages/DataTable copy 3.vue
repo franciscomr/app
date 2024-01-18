@@ -1,9 +1,5 @@
 <template>
-      <Notification />
   <div class="space-y-4 p-4">
-
-
-
     <div class="inline-flex  items-center w-full ">
       <div class="w-1/3 sm:w-1/4">
         <Header :label="title" />
@@ -30,7 +26,7 @@
           </div>
         </div>
         <Button :label="'Exportar'" :icon-name="'download'" />
-        <Button @click="redirectToAction(type, type + '.create',false)" :label="'Nuevo'" :icon-name="'add'" :default-button="false"/>
+        <Button @click="redirectTo(type + '.create')" :label="'Nuevo'" :icon-name="'add'" :default-button="false"/>
       </div>
     </div>
 
@@ -86,8 +82,7 @@
               </td>
               <td v-if="Object.keys(actions).length > 0" class="px-1 flex items-center justify-center space-x-1  h-12">
                 <div v-for="action in actions">
-                  
-                  <IconButton @click="redirectToAction(action.name, action.routeName,action.confirmationRequired,data.id )" :icon-name="action.iconName" />
+                  <IconButton :icon-name="action.iconName" />
                 </div>
               </td>
             </tr>
@@ -148,7 +143,6 @@ import Dropdown from '@/components/Dropdown.vue';
 import DropdownMenu from '@/components/DropdownMenu.vue';
 import RadioButtonGroup from '@/components/RadioButtonGroup.vue';
 import IconButton from '@/components/IconButton.vue';
-import Notification from '@/components/Notification.vue'
 
 export default {
   name:'DataTable',
@@ -182,8 +176,7 @@ export default {
     Dropdown,
     DropdownMenu,
     RadioButtonGroup,
-    IconButton,
-    Notification
+    IconButton
   },
   setup(props) {
 
@@ -255,31 +248,11 @@ export default {
       vueRouter.push({ name: path });
     }
 
-    const redirectToAction = (name:string, routeName:string ,confirmationRequired:boolean, routeId?:string ) => {
-      if(confirmationRequired) {
-        if (confirm(`¿Deseas ${name} con ID ${routeId} ?`) == false) {
-          return false;
-        } else {
-          if (routeId === undefined) {
-          vueRouter.push({ name: routeName });
-          } else {
-            vueRouter.push({ name: routeName, params: { id : routeId } });
-          }
-        }
-      } else {
-        if (routeId === undefined) {
-          vueRouter.push({ name: routeName });
-          } else {
-            vueRouter.push({ name: routeName, params: { id : routeId } });
-          }
-      }
-
-    }
     onMounted(() => {
       searchData()
     });
 
-    return {dataReceived,sortBy,sort, showFilterMenu, filters, rangeDateArray,changePageDisplayed, pagination, redirectTo, redirectToAction}
+    return {dataReceived,sortBy,sort, showFilterMenu, filters, rangeDateArray,changePageDisplayed, pagination, redirectTo}
   }
 
 

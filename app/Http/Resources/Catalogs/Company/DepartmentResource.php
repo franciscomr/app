@@ -18,6 +18,7 @@ class DepartmentResource extends JsonResource
       'type' => 'departments',
       'id' => (string) $this->resource->id,
       'attributes' => [
+        'id' => (string) $this->resource->id,
         'name' => $this->resource->name,
         'costCenter' => (string) $this->resource->costCenter,
         'createdBy' => $this->resource->createdBy,

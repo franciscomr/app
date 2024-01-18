@@ -1,61 +1,77 @@
 import axios from 'axios';
-import routerIndex from '@/router'
+import router from '@/router'
 import route from 'ziggy-js';
+import { DataSchema } from '@/classes/jsonApi/DataSchema';
+import { ErrorSchema } from '@/classes/jsonApi/ErrorSchema';
+import sendNotification from './sendNotification';
 
-type resource = {
-  resource:string;
-  action:string;
-  data:{[key: string] : string}
-}
-
-export default async function submitForm(form:resource) {
-  let redirectTo:string, url:string, formMethod:string;
-  let errors = {};
-
-  let data:any = {
-    data:{
-      type:'user',
-      attributes:form.data
-      
-  }}
+export default async function submitForm(submitData:DataSchema) {
+  let redirectTo:string, url:string, method:string, isNewRecord:boolean, errors:ErrorSchema[] =  [];
+  let data:object = {
+    data:submitData
+  }
   
-  switch (form.action) {
+  const currentRoute = router.currentRoute.value.path
+  const action = currentRoute.substring(currentRoute.lastIndexOf('/') + 1);
+  let vari:[][] = []
+  switch(action) {
     case 'login':
-      redirectTo = 'home';
-      url = route('login')
-      formMethod = 'post'
+      redirectTo = 'home'
+      url = route('login');
+      method = 'post';
+      isNewRecord = true;
       break;
+
     case 'create':
-      redirectTo = form.resource
-      url = route(form.resource + '.store');
-      formMethod = 'post'
+      redirectTo = submitData.type
+      url = route(submitData.type + '.store');
+      method = 'post';
+      isNewRecord = true;
       break;
+
     case 'edit':
-      redirectTo = form.resource
-      url = route(form.resource + '.update', { id: routerIndex.currentRoute.value.params.id });
-      formMethod = 'patch'
+      redirectTo = submitData.type
+      url = route(submitData.type + '.update', { id: router.currentRoute.value.params.id });
+      method = 'patch'
+      isNewRecord = false;
       break;
-  
+
     default:
+      redirectTo = 'home'
+      url = route('home');
+      isNewRecord = false;
+      method = 'get';
       break;
   }
 
-  url = route(form.resource)
-
   await axios.get('sanctum/csrf-cookie')
-  await axios.post(url, data)
+  await axios({
+    method: method,
+    url: url,
+    data: data
+  })
   .then(res => {
-    routerIndex.push({ name: redirectTo })
+    if(redirectTo !== 'home'){
+      console.log('send Notification')
+    }
+    router.push({ name: redirectTo })
   })
   .catch(err => {
-    if (err.response) {
-      errors = err.response.data.errors
-      console.log(err)
-    }
-    else if (err.request) {
-      console.log(err.request)
-    }
-  })
- return errors
+    console.log(err.response.data)
 
+    for(let error in err.response.data.errors){
+    //  vari.push([err.response.data.errors[error][1],err.response.data.errors[error][3]])
+    //  console.log(err.response.data.errors[error][1])
+
+      let result = new ErrorSchema(
+        err.response.data.errors[error][0],
+        err.response.data.errors[error][1],
+        err.response.data.errors[error][2],
+        err.response.data.errors[error][3]
+      );
+      errors.push(result);
+    }
+  });
+  console.log(vari)
+  return errors;
 }

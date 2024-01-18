@@ -13,7 +13,8 @@ class DepartmentRequest extends FormRequest
   {
     $arrarFormat = array(
       'type' => 'departments',
-      'attributes' => []
+      'attributes' => [],
+      'relationships' => []
     );
     $arrayInput = (array)$this->input('data');
     if (empty(array_diff_key($arrarFormat, $arrayInput))) {

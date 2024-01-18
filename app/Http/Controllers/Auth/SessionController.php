@@ -18,7 +18,7 @@ class SessionController extends Controller
 {
   public function login(LoginRequest $request)
   {
-    $request->authenticate();
+    // $request->authenticate();
 
     $user = User::where('username', $request->validated('username'))->first();
     return response()->json([$user]);

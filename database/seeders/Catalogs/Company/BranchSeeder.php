@@ -103,6 +103,17 @@ class BranchSeeder extends Seeder
 
         Branch::create([
             'company_id' => 1,
+            'name' => 'Periferico',
+            'address' => 'Av. Símbolos Patrios No.101 Col. Miguel Alemán',
+            'city' => 'Oaxaca',
+            'state' => 'Oaxaca',
+            'postalCode' => '68000',
+            'createdBy' => 'Administrador',
+            'updatedBy' => 'Administrador'
+        ]);
+
+        Branch::create([
+            'company_id' => 1,
             'name' => 'Diamante',
             'address' => 'Carretera Internacional kilómetro 2.5 No.104',
             'city' => 'San Agustin Yatareni',

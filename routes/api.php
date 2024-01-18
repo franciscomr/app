@@ -16,6 +16,8 @@ use App\Http\Controllers\Catalogs\Assets\AssetTypeController;
 use App\Http\Controllers\Catalogs\Assets\VendorController;
 use App\Http\Controllers\Catalogs\Assets\ProductController;
 
+use App\Http\Controllers\Utils\SelectController;
+
 use App\Http\Controllers\Auth\SessionController;
 
 /*
@@ -118,3 +120,5 @@ Route::controller(VendorController::class)->middleware('auth:sanctum')->group(fu
     Route::patch('vendors/{vendor}', 'update')->name('vendors.update');
     Route::get('vendors/export', 'export')->name('vendors.export');
 });
+
+Route::get('select', [SelectController::class, 'select'])->name('select');

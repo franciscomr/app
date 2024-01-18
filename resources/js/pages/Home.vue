@@ -33,7 +33,7 @@
                     <DropdownMenu v-for="menu in userMenu"  :label="menu.title" :icon-name="menu.icon">
                       <template #content>
                         <div v-for="(index, value) in menu.links" :key="index" class="flex items-center justify-start w-full">
-                          <DropdownLink :label="value" :route-name="index" class="indent-9 px-0.5"/>
+                          <DropdownLink @click="showMenu = false" :label="value" :route-name="index" class="indent-9 px-0.5"/>
                         </div>
                       </template>
                     </DropdownMenu>
@@ -43,7 +43,7 @@
               </div>
             </div>
 
-            <div class="w-full h-full overflow-y-auto p-4">
+            <div class="w-full h-full overflow-y-auto">
             <router-view />
             </div>
           </div>
@@ -88,6 +88,7 @@ export default {
         'links': {
           'Organizaciones': 'companies',
           'Sucursales': 'branches',
+          'Departamentos': 'departments'
         }
       },
       'new': {
@@ -96,6 +97,7 @@ export default {
         'links': {
           'Organizaciones': 'companies',
           'Sucursales': 'branches',
+          'Departamentos': 'departments'
         }
       },
 

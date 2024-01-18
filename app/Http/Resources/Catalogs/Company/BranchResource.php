@@ -18,7 +18,6 @@ class BranchResource extends JsonResource
 			'type' => 'branches',
 			'id' => (string) $this->resource->id,
 			'attributes' => [
-				'id' => (string) $this->resource->id,
 				'name' => $this->resource->name,
 				'address' => $this->resource->address,
 				'city' => $this->resource->city,
